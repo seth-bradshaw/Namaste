@@ -1,15 +1,15 @@
-package com.whosapp.messenger;
+package com.portfolio.namaste;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MessengerApplication
+public class NamasteApplication
 {
 
     public static void main(String[] args)
     {
-        SpringApplication.run(MessengerApplication.class, args);
+        SpringApplication.run(NamasteApplication.class, args);
     }
 
 }
