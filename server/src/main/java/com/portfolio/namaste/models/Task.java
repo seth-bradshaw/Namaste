@@ -2,10 +2,7 @@ package com.portfolio.namaste.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tasks")
 public class Task
@@ -31,11 +29,11 @@ public class Task
     private String severity;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"roles", "journals"})
     private User user;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "status", allowSetters = true)
-    private Set<TaskStatuses> statuses = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = "tasks", allowSetters = true)
+    private Status status;
 
 }

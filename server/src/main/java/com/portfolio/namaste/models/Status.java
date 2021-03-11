@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -24,5 +26,5 @@ public class Status
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "status", allowSetters = true)
-    private Set<TaskStatuses> tasks = new HashSet<>();
+    private List<Task> tasks = new ArrayList<>();
 }
