@@ -1,6 +1,8 @@
 package com.portfolio.namaste.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,8 +31,6 @@ public class User
     @NonNull
     private String lastName;
 
-    private String fullName = firstName + lastName;
-
     @NotNull
     @NonNull
     private String email;
@@ -41,6 +41,7 @@ public class User
 
     @NotNull
     @NonNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @OneToMany(mappedBy = "user",
@@ -52,7 +53,7 @@ public class User
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    @JsonIgnore
     private List<Task> tasks = new ArrayList<>();
 
     @OneToMany(mappedBy = "user",
@@ -61,6 +62,7 @@ public class User
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Journal> journals = new ArrayList<>();
 
+    @JsonIgnore
     public List<SimpleGrantedAuthority> getAuthority()
     {
         List<SimpleGrantedAuthority> rtnList = new ArrayList<>();

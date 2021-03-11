@@ -5,6 +5,8 @@ import com.portfolio.namaste.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service(value = "roleService")
 public class RoleServiceImpl implements RoleService
 {
@@ -15,6 +17,15 @@ public class RoleServiceImpl implements RoleService
     public Role save(Role role)
     {
         Role rtnRole = roleRepository.save(role);
+
+        return rtnRole;
+    }
+
+    @Override
+    public Role findRoleById(long roleId)
+    {
+        Role rtnRole = roleRepository.findById(roleId)
+                .orElseThrow(() -> new EntityNotFoundException("Role with id " + roleId + " not found!"));
 
         return rtnRole;
     }

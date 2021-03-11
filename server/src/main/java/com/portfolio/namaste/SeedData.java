@@ -32,9 +32,6 @@ public class SeedData implements CommandLineRunner
     @Autowired
     private UserRolesService userRolesService;
 
-    @Autowired
-    private TaskStatusesService taskStatusesService;
-
     @Transactional
     @Override public void run(String... args) throws Exception
     {
@@ -48,6 +45,8 @@ public class SeedData implements CommandLineRunner
         r3 = roleService.save(r3);
 
         User u1 = new User();
+        u1.setFirstName("user1");
+        u1.setLastName("last");
         u1.setUsername("admin");
         u1.setPassword("password");
         u1.setEmail("admin@example.com");
@@ -58,7 +57,9 @@ public class SeedData implements CommandLineRunner
         u1 = userService.save(u1);
 
         User u2 = new User();
-        u2.setUsername("user1");
+        u2.setFirstName("user2");
+        u2.setLastName("last");
+        u2.setUsername("user2");
         u2.setPassword("password");
         u2.setEmail("user1@example.com");
         u2.getRoles().clear();
@@ -66,6 +67,8 @@ public class SeedData implements CommandLineRunner
         u2 = userService.save(u2);
 
         User u3 = new User();
+        u3.setFirstName("user3");
+        u3.setLastName("last");
         u3.setUsername("datauser");
         u3.setPassword("password");
         u3.setEmail("datauser@example.com");
@@ -85,31 +88,31 @@ public class SeedData implements CommandLineRunner
         t2.setTitle("THIS IS TICKET 2");
         t2.setDescription("I encountered my first error!");
         t2.setSeverity("uno");
+        t2.setUser(u2);
         t2 = taskService.save(t2);
-        t1.setUser(u2);
 
         Task t3 = new Task();
         t3.setTitle("THIS IS TICKET 3");
         t3.setDescription("I encountered my first error!");
         t3.setSeverity("uno");
-        t3 = taskService.save(t3);
         t3.setUser(u1);
+        t3 = taskService.save(t3);
+
 
         Status s1 = new Status();
         s1.setStatusType("Not Started");
+        s1 = statusService.save(s1);
+        t1.setStatus(s1);
+        t3.setStatus(s1);
 
         Status s2 = new Status();
         s2.setStatusType("In Progress");
         s2 = statusService.save(s2);
+        t2.setStatus(s2);
 
         Status s3 = new Status();
         s3.setStatusType("Completed");
         s3 = statusService.save(s3);
 
-        t1 = taskService.save(t1);
-        t2 = taskService.save(t2);
-        t3 = taskService.save(t3);
-//        u1.getTickets().add(new UserTickets(u1, t3));
-//        u3.getTickets().add(new UserTickets(u3, t3));
     }
 }
