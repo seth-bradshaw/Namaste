@@ -3,7 +3,6 @@ package com.portfolio.namaste.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,23 +22,18 @@ public class User
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
-    @NotNull
     @NonNull
     private String firstName;
 
-    @NotNull
     @NonNull
     private String lastName;
 
-    @NotNull
     @NonNull
     private String email;
 
-    @NotNull
     @NonNull
     private String username;
 
-    @NotNull
     @NonNull
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -58,8 +52,9 @@ public class User
 
     @OneToMany(mappedBy = "user",
     cascade = CascadeType.ALL,
-    orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    orphanRemoval = true,
+    fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Journal> journals = new ArrayList<>();
 
     @JsonIgnore

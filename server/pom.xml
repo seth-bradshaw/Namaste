@@ -75,11 +75,15 @@
             <artifactId>postgresql</artifactId>
         </dependency>
         <!-- Security Dependencies End -->
-
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate</groupId>-->
+<!--            <artifactId>hibernate-core</artifactId>-->
+<!--            <version>5.3.7.Final</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
-        <finalName>bugtrackerbackend27</finalName>
+        <finalName>namasteServer</finalName>
         <plugins>
             <plugin>
                 <groupId>com.heroku.sdk</groupId>

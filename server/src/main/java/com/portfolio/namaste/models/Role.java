@@ -1,7 +1,6 @@
 package com.portfolio.namaste.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +19,6 @@ public class Role
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long roleId;
 
-    @NotNull
     @NonNull
     @Column(unique = true)
     private String roletype;
