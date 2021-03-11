@@ -30,6 +30,9 @@ public class SeedData implements CommandLineRunner
     private TaskService taskService;
 
     @Autowired
+    private MeditationSessionService meditationSessionService;
+
+    @Autowired
     private UserRolesService userRolesService;
 
     @Transactional
@@ -114,5 +117,18 @@ public class SeedData implements CommandLineRunner
         s3.setStatusType("Completed");
         s3 = statusService.save(s3);
 
+        MeditationSession ms1 = new MeditationSession();
+        ms1.setSessionLength(5);
+        ms1.setTitle("Testing adding new session");
+        ms1.setDescription("testing");
+        ms1.setVideoUrl("testurl");
+        ms1 = meditationSessionService.save(ms1);
+
+        Journal j1 = new Journal();
+        j1.setTitle("Testing Journal Title");
+        j1.setTextBody("This is the body of the entry");
+        j1.setMood("happy");
+        j1.setUser(u2);
+        j1 = journalService.save(j1);
     }
 }

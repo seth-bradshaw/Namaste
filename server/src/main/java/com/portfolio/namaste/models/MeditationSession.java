@@ -1,7 +1,6 @@
 package com.portfolio.namaste.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -23,14 +22,11 @@ public class MeditationSession
     private long sessionLength;
 
     @NonNull
-    @NotNull
-    private long title;
+    private String title;
 
     @NonNull
-    @NotNull
-    private long description;
+    private String description;
 
     @NonNull
-    @NotNull
-    private long videoUrl;
+    private String videoUrl;
 }

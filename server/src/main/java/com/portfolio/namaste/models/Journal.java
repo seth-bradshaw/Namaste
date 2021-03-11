@@ -27,6 +27,6 @@ public class Journal
     private String mood;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "journal", allowSetters = true)
+    @JsonIgnoreProperties(value = {"journal", "roles"}, allowSetters = true)
     private User user;
 }

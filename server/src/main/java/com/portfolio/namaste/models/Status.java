@@ -1,5 +1,6 @@
 package com.portfolio.namaste.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,6 @@ public class Status
     private String statusType;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "status", allowSetters = true)
+    @JsonIgnore
     private List<Task> tasks = new ArrayList<>();
 }
