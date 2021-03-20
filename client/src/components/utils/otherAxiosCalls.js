@@ -44,7 +44,7 @@ export const signUp = (newUser) => {
 
 export const getActiveUser = () => {
   return axiosWithAuth()
-    .get(`/users/user/getinfo`)
+    .get(`/getuserinfo`)
     .then((res) => {
       return res;
     })

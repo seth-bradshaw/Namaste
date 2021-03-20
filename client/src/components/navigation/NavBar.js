@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
@@ -11,12 +12,12 @@ export default function NavBar() {
     >
       <h1 style={{ alignContent: "center", fontSize: "22px" }}>Namaste</h1>
       <div className="NavBar_Link_Container" style={{ fontSize: "18px" }}>
-        <a href="/tasks" style={{ alignContent: "center", padding: "5%" }}>
+        <Link href="/task" style={{ alignContent: "center", padding: "5%" }}>
           Tasks
-        </a>
-        <a href="/journals" style={{ alignContent: "center", padding: "5%" }}>
+        </Link>
+        <Link to="/journal" style={{ alignContent: "center", padding: "5%" }}>
           Journals
-        </a>
+        </Link>
       </div>
       <button>Menu</button>
     </div>

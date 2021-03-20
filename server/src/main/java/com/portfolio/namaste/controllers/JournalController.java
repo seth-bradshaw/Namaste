@@ -44,6 +44,7 @@ public class JournalController
     @PostMapping(value = "/journals", consumes = "application/json")
     public ResponseEntity<?> addNewJournal(@RequestBody @Valid Journal newJournal)
     {
+        System.out.println(newJournal);
         newJournal.setJournalId(0);
         Journal addedJournal = journalService.save(newJournal);
 
