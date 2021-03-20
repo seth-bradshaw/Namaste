@@ -130,5 +130,40 @@ public class SeedData implements CommandLineRunner
         j1.setMood("happy");
         j1.setUser(u2);
         j1 = journalService.save(j1);
+
+        Journal j2 = new Journal();
+        j2.setTitle("Testing Journal Title");
+        j2.setTextBody("This is the body of the entry");
+        j2.setMood("happy");
+        j2.setUser(u2);
+        j2 = journalService.save(j2);
+
+        Journal j3 = new Journal();
+        j3.setTitle("Testing Journal Title");
+        j3.setTextBody("This is the body of the entry");
+        j3.setMood("happy");
+        j3.setUser(u2);
+        j3 = journalService.save(j3);
+
+        Journal j4 = new Journal();
+        j4.setTitle("Testing Journal Title");
+        j4.setTextBody("This is the body of the entry");
+        j4.setMood("happy");
+        j4.setUser(u2);
+        j4 = journalService.save(j4);
+
+        Journal j5 = new Journal();
+        j5.setTitle("Testing Journal Title");
+        j5.setTextBody("This is the body of the entry");
+        j5.setMood("happy");
+        j5.setUser(u2);
+        j5 = journalService.save(j5);
+
+        Journal j6 = new Journal();
+        j6.setTitle("Testing Journal Title");
+        j6.setTextBody("This is the body of the entry");
+        j6.setMood("happy");
+        j6.setUser(u1);
+        j6 = journalService.save(j6);
     }
 }

@@ -6,6 +6,8 @@ import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
 import JournalDashboard from "./components/journal/JournalDashboard";
 import TaskDashboard from "./components/task/TaskDashboard";
+import Dashboard from "./components/Dashboard";
+import NewJournalForm from "./components/journal/NewJournalForm";
 
 function App() {
   return (
@@ -14,8 +16,10 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/journal" component={JournalDashboard} />
         <Route path="/task" component={TaskDashboard} />
+        <Route path="/new_journal" component={NewJournalForm} />
       </Switch>
     </div>
   );
