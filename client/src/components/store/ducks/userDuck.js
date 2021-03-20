@@ -32,9 +32,13 @@ export const types = {
 export const actions = {
   loginThunk: (credentials) => (dispatch) => {
     dispatch({ type: types.LOGIN_START });
+    console.log("action", credentials);
     login(credentials)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem(
+          "token",
+          `${res.data.token_type} ${res.data.access_token}`
+        );
         dispatch({ type: types.LOGIN_SUCCESS });
       })
       .catch((err) => {
