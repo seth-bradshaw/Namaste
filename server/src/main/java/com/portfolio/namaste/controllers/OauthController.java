@@ -143,6 +143,7 @@ public class OauthController
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> loginUser(@Valid @RequestBody LoginCredentials loginCredentials, HttpServletRequest httpServletRequest)
     {
+        System.out.println(loginCredentials.getPassword() + loginCredentials.getUsername());
         RestTemplate restTemplate = new RestTemplate();
         String requestURI = "http://localhost" + ":" + httpServletRequest.getLocalPort() + "/oauth/token";
 
@@ -161,7 +162,7 @@ public class OauthController
         map.add("scope",
                 "read write trust");
         map.add("username",
-                loginCredentials.getUserName());
+                loginCredentials.getUsername());
         map.add("password",
                 loginCredentials.getPassword());
 

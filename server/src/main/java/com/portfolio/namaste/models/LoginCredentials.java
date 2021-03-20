@@ -14,6 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginCredentials
 {
-    private String userName;
+    private String username;
     private String password;
 }
