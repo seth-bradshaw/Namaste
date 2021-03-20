@@ -25,7 +25,7 @@ public class JournalController
         return new ResponseEntity<>(journalList, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/journals/user/{userId}", produces = "application/json")
+    @GetMapping(value = "/user/{userId}", produces = "application/json")
     public ResponseEntity<?> getAllJournalsForUserId(@PathVariable long userId)
     {
         List<Journal> journalList = journalService.findAllJournalsForUserId(userId);

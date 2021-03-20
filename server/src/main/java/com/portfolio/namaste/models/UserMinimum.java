@@ -1,11 +1,19 @@
 package com.portfolio.namaste.models;
 
+import lombok.NonNull;
+
 public class UserMinimum
 {
     /**
      * The username (String)
      */
     private String username;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
 
     /**
      * The user's password (String)
@@ -51,5 +59,35 @@ public class UserMinimum
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 }

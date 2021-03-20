@@ -1,7 +1,7 @@
 import {
   getTasksByUserId,
   getTaskById,
-  postTaskById,
+  addNewTask,
   editTaskById,
   deleteTaskById,
 } from "../../utils/otherAxiosCalls";
@@ -58,7 +58,7 @@ export const actions = {
   },
   postTaskThunk: (newTask) => (dispatch) => {
     dispatch({ type: types.PUT_TASK_START });
-    postTaskById(newTask)
+    addNewTask(newTask)
       .then((res) => {
         dispatch({ type: types.PUT_TASK_SUCCESS });
       })
@@ -97,14 +97,14 @@ export const actions = {
   },
 };
 
-const userInitialState = {
+const taskInitialState = {
   tasks: [],
   task: {},
   status: "idle",
   error: "",
 };
 
-const userReducer = (state = userInitialState, action) => {
+const taskReducer = (state = taskInitialState, action) => {
   switch (action.type) {
     case types.GET_TASKS_START:
       return {
@@ -217,3 +217,5 @@ const userReducer = (state = userInitialState, action) => {
       return state;
   }
 };
+
+export default taskReducer;

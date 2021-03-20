@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.*;
@@ -65,11 +66,23 @@ public class User
         for (UserRoles r : this.roles)
         {
             String myRole = "ROLE_" + r.getRole()
-                    .getRoletype()
+                    .getRoleType()
                     .toUpperCase();
             rtnList.add(new SimpleGrantedAuthority(myRole));
         }
 
         return rtnList;
+    }
+
+    /**
+     * Sets password encrypt.
+     *
+     * @param password the password
+     */
+    public void setPasswordEncrypt(String password)
+    {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        setPassword(encoder.encode(password));
+        System.out.println("POST ENCODE: " + this.password);
     }
 }

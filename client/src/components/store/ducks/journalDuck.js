@@ -1,7 +1,7 @@
 import {
   getJournalsByUserId,
   getJournalById,
-  postJournalById,
+  addNewJournal,
   editJournalById,
   deleteJournalById,
 } from "../../utils/otherAxiosCalls";
@@ -56,6 +56,19 @@ export const actions = {
         dispatch({ type: types.GET_JOURNAL_RESOLVE });
       });
   },
+  postJournalThunk: (newJournal) => (dispatch) => {
+    dispatch({ type: types.GET_JOURNAL_START });
+    addNewJournal(newJournal)
+      .then((res) => {
+        dispatch({ type: types.GET_JOURNAL_SUCCESS });
+      })
+      .catch((err) => {
+        dispatch({ type: types.GET_JOURNAL_ERROR, payload: err.message });
+      })
+      .finally(() => {
+        dispatch({ type: types.GET_JOURNAL_RESOLVE });
+      });
+  },
   putJournalThunk: (journalId, editedJournal) => (dispatch) => {
     dispatch({ type: types.PUT_JOURNAL_START });
     editJournalById(journalId, editedJournal)
@@ -84,14 +97,14 @@ export const actions = {
   },
 };
 
-const userInitialState = {
+const journalInitialState = {
   journals: [],
   journal: {},
   status: "idle",
   error: "",
 };
 
-const userReducer = (state = userInitialState, action) => {
+const journalReducer = (state = journalInitialState, action) => {
   switch (action.type) {
     case types.GET_JOURNALS_START:
       return {
@@ -204,3 +217,5 @@ const userReducer = (state = userInitialState, action) => {
       return state;
   }
 };
+
+export default journalReducer;

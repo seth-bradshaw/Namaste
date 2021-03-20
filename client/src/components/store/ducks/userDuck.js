@@ -220,3 +220,5 @@ const userReducer = (state = userInitialState, action) => {
       return state;
   }
 };
+
+export default userReducer;
