@@ -29,4 +29,12 @@ public class RoleServiceImpl implements RoleService
 
         return rtnRole;
     }
+
+    @Override
+    public Role findByRoleType(String roleType)
+    {
+        Role rtnRole = roleRepository.findRoleByRoleType(roleType);
+
+        return rtnRole;
+    }
 }

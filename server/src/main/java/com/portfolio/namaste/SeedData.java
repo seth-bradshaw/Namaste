@@ -51,7 +51,7 @@ public class SeedData implements CommandLineRunner
         u1.setFirstName("user1");
         u1.setLastName("last");
         u1.setUsername("admin");
-        u1.setPassword("password");
+        u1.setPasswordEncrypt("password");
         u1.setEmail("admin@example.com");
         u1.getRoles().clear();
         u1.getRoles().add(new UserRoles(u1, r1));
@@ -63,7 +63,7 @@ public class SeedData implements CommandLineRunner
         u2.setFirstName("user2");
         u2.setLastName("last");
         u2.setUsername("user2");
-        u2.setPassword("password");
+        u2.setPasswordEncrypt("password");
         u2.setEmail("user1@example.com");
         u2.getRoles().clear();
         u2.getRoles().add(new UserRoles(u2, r2));
@@ -73,7 +73,7 @@ public class SeedData implements CommandLineRunner
         u3.setFirstName("user3");
         u3.setLastName("last");
         u3.setUsername("datauser");
-        u3.setPassword("password");
+        u3.setPasswordEncrypt("password");
         u3.setEmail("datauser@example.com");
         u3.getRoles().clear();
         u3.getRoles().add(new UserRoles(u3, r2));

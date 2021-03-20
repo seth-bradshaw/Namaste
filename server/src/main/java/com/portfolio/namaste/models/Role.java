@@ -21,7 +21,7 @@ public class Role
 
     @NonNull
     @Column(unique = true)
-    private String roletype;
+    private String roleType;
 
     @OneToMany(mappedBy = "role",
             cascade = CascadeType.ALL,
