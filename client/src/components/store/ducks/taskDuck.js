@@ -27,6 +27,7 @@ export const types = {
   DELETE_TASK_SUCCESS: "DELETE_TASK_SUCCESS",
   DELETE_TASK_ERROR: "DELETE_TASK_ERROR",
   DELETE_TASK_RESOLVE: "DELETE_TASK_RESOLVE",
+  SET_TASK_ACTIVE: "SET_TASK_ACTIVE",
 };
 
 export const actions = {
@@ -94,6 +95,9 @@ export const actions = {
       .finally(() => {
         dispatch({ type: types.DELETE_TASK_RESOLVE });
       });
+  },
+  setTaskActiveThunk: (task) => (dispatch) => {
+    dispatch({ type: types.SET_TASK_ACTIVE, payload: task });
   },
 };
 
@@ -212,6 +216,11 @@ const taskReducer = (state = taskInitialState, action) => {
       return {
         ...state,
         status: "idle",
+      };
+    case types.SET_TASK_ACTIVE:
+      return {
+        ...state,
+        task: action.payload,
       };
     default:
       return state;

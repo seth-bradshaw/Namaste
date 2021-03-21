@@ -12,7 +12,6 @@ export default function JournalDashboard() {
   const { push } = useHistory();
 
   useEffect(() => {
-    console.log(activeUser);
     dispatch(journalActions.getJournalsThunk(activeUser.userId));
   }, []);
 
