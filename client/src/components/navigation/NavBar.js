@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function NavBar() {
+  const { push } = useHistory();
+
   return (
     <div
       style={{
@@ -10,9 +12,14 @@ export default function NavBar() {
         height: "50px",
       }}
     >
-      <h1 style={{ alignContent: "center", fontSize: "22px" }}>Namaste</h1>
+      <h1
+        style={{ alignContent: "center", fontSize: "22px" }}
+        onClick={() => push("/dashboard")}
+      >
+        Namaste
+      </h1>
       <div className="NavBar_Link_Container" style={{ fontSize: "18px" }}>
-        <Link href="/task" style={{ alignContent: "center", padding: "5%" }}>
+        <Link to="/task" style={{ alignContent: "center", padding: "5%" }}>
           Tasks
         </Link>
         <Link to="/journal" style={{ alignContent: "center", padding: "5%" }}>
