@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { actions as taskActions } from "../store/ducks/taskDuck";
 
 export default function TaskModal(props) {
-  const { modalActive, handleModalClose } = props;
+  const { modalViewActive, closeViewModal } = props;
   const task = useSelector((state) => state.task.task);
   const dispatch = useDispatch();
 
   return (
-    <Modal show={modalActive} onHide={handleModalClose}>
+    <Modal show={modalViewActive} onHide={() => closeViewModal()}>
       <Modal.Header closeButton>
         <Modal.Title>{task.title}</Modal.Title>
       </Modal.Header>
@@ -19,10 +19,10 @@ export default function TaskModal(props) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleModalClose}>
+        <Button variant="secondary" onClick={() => closeViewModal()}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleModalClose}>
+        <Button variant="primary" onClick={() => closeViewModal()}>
           Save changes
         </Button>
       </Modal.Footer>

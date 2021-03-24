@@ -29,7 +29,6 @@ export const types = {
   DELETE_TASK_RESOLVE: "DELETE_TASK_RESOLVE",
   SET_TASK_ACTIVE: "SET_TASK_ACTIVE",
 };
-
 export const actions = {
   getTasksThunk: (userId) => (dispatch) => {
     dispatch({ type: types.GET_TASKS_START });
@@ -58,16 +57,16 @@ export const actions = {
       });
   },
   postTaskThunk: (newTask) => (dispatch) => {
-    dispatch({ type: types.PUT_TASK_START });
+    dispatch({ type: types.POST_TASK_START });
     addNewTask(newTask)
       .then((res) => {
-        dispatch({ type: types.PUT_TASK_SUCCESS });
+        dispatch({ type: types.POST_TASK_SUCCESS });
       })
       .catch((err) => {
-        dispatch({ type: types.PUT_TASK_ERROR, payload: err.message });
+        dispatch({ type: types.POST_TASK_ERROR, payload: err.message });
       })
       .finally(() => {
-        dispatch({ type: types.PUT_TASK_RESOLVE });
+        dispatch({ type: types.POST_TASK_RESOLVE });
       });
   },
   putTaskThunk: (taskId, editedTask) => (dispatch) => {
@@ -98,6 +97,9 @@ export const actions = {
   },
   setTaskActiveThunk: (task) => (dispatch) => {
     dispatch({ type: types.SET_TASK_ACTIVE, payload: task });
+  },
+  setTaskAddedThunk: (boolean) => (dispatch) => {
+    dispatch({ type: types.TASK_ADDED, payload: boolean });
   },
 };
 
@@ -160,6 +162,7 @@ const taskReducer = (state = taskInitialState, action) => {
         status: "post/pending",
       };
     case types.POST_TASK_SUCCESS:
+      console.log("SUCCESS");
       return {
         ...state,
         status: "post/success",

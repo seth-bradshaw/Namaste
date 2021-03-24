@@ -1,42 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Badge } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { actions as userActions } from "../store/ducks/userDuck";
 import { actions as taskActions } from "../store/ducks/taskDuck";
 import NewTaskForm from "./NewTaskForm";
 import TaskBar from "./TaskBar";
 import TaskModal from "./TaskModal";
+import useModal from "../hooks/useModal";
+import { useEffectAfterMount } from "../hooks/useEffectAfterMount";
 
-export default function TaskDashboard() {
-  const [modalActive, setModalActive] = useState(false);
-  const [addTaskActive, setAddTaskActive] = useState(false);
+function TaskDashboard() {
+  const [modalViewActive, openViewModal, closeViewModal] = useModal();
+  const [modalAddActive, openAddModal, closeAddModal] = useModal();
   const activeUser = useSelector((state) => state.user.activeUser);
-  const tasks = useSelector((state) => state.task.tasks);
+  const { tasks, status } = useSelector((state) => state.task);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(taskActions.getTasksThunk(activeUser.userId));
   }, []);
 
-  const handleModalClose = () => {
-    setModalActive(false);
-  };
+  useEffectAfterMount(() => {
+    console.log("inside mount");
+    dispatch(taskActions.getTasksThunk(activeUser.userId));
+  }, [modalAddActive]);
 
   return (
     <div>
-      {modalActive ? (
+      {modalViewActive ? (
         <TaskModal
-          modalActive={modalActive}
-          handleModalClose={handleModalClose}
+          modalViewActive={modalViewActive}
+          closeViewModal={closeViewModal}
         ></TaskModal>
       ) : (
         <></>
       )}
-      {addTaskActive ? (
+      {modalAddActive ? (
         <NewTaskForm
-          addTaskActive={addTaskActive}
-          setAddTaskActive={setAddTaskActive}
+          modalAddActive={modalAddActive}
+          closeAddModal={closeAddModal}
         />
       ) : (
         <></>
@@ -44,13 +45,15 @@ export default function TaskDashboard() {
       {tasks.map((tsk) => {
         return (
           <span onClick={() => dispatch(taskActions.setTaskActiveThunk(tsk))}>
-            <TaskBar setModalActive={setModalActive} task={tsk}></TaskBar>
+            <TaskBar openViewModal={openViewModal} task={tsk}></TaskBar>
           </span>
         );
       })}
-      <div onClick={() => setAddTaskActive(true)}>
+      <div onClick={() => openAddModal()}>
         <p>Add New Task</p>
       </div>
     </div>
   );
 }
+
+export default TaskDashboard;

@@ -32,7 +32,6 @@ export const types = {
 export const actions = {
   loginThunk: (credentials) => (dispatch) => {
     dispatch({ type: types.LOGIN_START });
-    console.log("action", credentials);
     login(credentials)
       .then((res) => {
         localStorage.setItem(

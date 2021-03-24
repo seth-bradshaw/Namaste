@@ -1,36 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useEffectAfterMount } from "../hooks/useEffectAfterMount";
 import { useDispatch, useSelector } from "react-redux";
 import { actions as journalActions } from "../store/ducks/journalDuck";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import JournalCard from "./JournalCard";
 import { CardColumns } from "react-bootstrap";
+import NewJournalForm from "./NewJournalForm";
+import useJournalEntry from "../hooks/useJournalEntry";
 
-export default function JournalDashboard() {
+function JournalDashboard() {
   const dispatch = useDispatch();
-  const journals = useSelector((state) => state.journal.journals);
+  const [editorActive, openEditor, closeEditor] = useJournalEntry();
+  const [addingJournal, setAddingJournal] = useState(false);
+  const { journals } = useSelector((state) => state.journal);
   const activeUser = useSelector((state) => state.user.activeUser);
-  const { push } = useHistory();
 
   useEffect(() => {
     dispatch(journalActions.getJournalsThunk(activeUser.userId));
   }, []);
 
+  useEffectAfterMount(() => {
+    dispatch(journalActions.getJournalsThunk(activeUser.userId));
+  }, [editorActive]);
+
   return (
     <div>
-      {journals != [] ? (
-        <CardColumns>
-          {journals.map((jnl) => {
-            return (
-              <>
-                <JournalCard journal={jnl} />
-              </>
-            );
-          })}
-        </CardColumns>
+      {editorActive ? (
+        <NewJournalForm closeEditor={closeEditor} />
       ) : (
-        <p>Loading...</p>
+        <div>
+          <CardColumns>
+            {journals.length > 0 ? (
+              journals.map((jnl) => {
+                return (
+                  <>
+                    <JournalCard journal={jnl} />
+                  </>
+                );
+              })
+            ) : (
+              <p>loading...</p>
+            )}
+            <button onClick={() => openEditor()}>add journal</button>
+          </CardColumns>
+        </div>
       )}
-      <Link to="/new_journal">add journal</Link>
     </div>
   );
 }
+
+export default JournalDashboard;

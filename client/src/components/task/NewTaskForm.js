@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Form, Row, Col } from "react-bootstrap";
+import { Modal, Button, Form, Row, Col, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { actions as taskActions } from "../store/ducks/taskDuck";
 
@@ -12,14 +12,16 @@ const initialState = {
 };
 
 export default function NewTaskForm(props) {
-  const { addTaskActive, setAddTaskActive } = props;
+  const { modalAddActive, closeAddModal } = props;
   const [newTask, setNewTask] = useState(initialState);
   const activeUser = useSelector((state) => state.user.activeUser);
+  const isTaskAdded = useSelector((state) => state.task.taskAdded);
   const dispatch = useDispatch();
 
-  const handleModalClose = () => {
-    setAddTaskActive(false);
-  };
+  //   if (isTaskAdded === true) {
+  //     setmodalAddActive(false);
+  //     console.log("IN CONDITIONAL");
+  //   }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,11 +32,13 @@ export default function NewTaskForm(props) {
     e.preventDefault();
     dispatch(taskActions.postTaskThunk({ ...newTask, user: activeUser }));
     setNewTask(initialState);
-    setAddTaskActive(false);
+    setTimeout(function () {
+      closeAddModal();
+    }, 30);
   };
 
   return (
-    <Modal show={addTaskActive} onHide={handleModalClose}>
+    <Modal show={modalAddActive} onHide={closeAddModal}>
       <Modal.Header closeButton>
         <Modal.Title>Add New Task</Modal.Title>
       </Modal.Header>
@@ -101,12 +105,28 @@ export default function NewTaskForm(props) {
       </div>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleModalClose}>
+        <Button variant="secondary" onClick={closeAddModal}>
           Close
         </Button>
         <Button variant="primary" onClick={(e) => handleSubmit(e)}>
           Add
         </Button>
+        {/* {isTaskAdded === false ? (
+          <Button variant="primary" onClick={(e) => handleSubmit(e)}>
+            Add
+          </Button>
+        ) : (
+          <Button variant="primary" disabled>
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+            Loading...
+          </Button>
+        )} */}
       </Modal.Footer>
     </Modal>
   );

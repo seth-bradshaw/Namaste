@@ -1,5 +1,13 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import styled from "styled-components";
+
+const StyledLink = styled(Link)`
+  margin: "auto",
+  align-content: "center"
+`;
+
+const StyledDiv = styled.div``;
 
 export default function NavBar() {
   const { push } = useHistory();
