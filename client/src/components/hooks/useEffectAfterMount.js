@@ -7,7 +7,5 @@ export function useEffectAfterMount(cb, dependencies) {
       return cb();
     }
     justMounted.current = false;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
-  console.log("AFTER", justMounted);
 }

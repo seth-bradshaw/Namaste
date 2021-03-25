@@ -98,9 +98,6 @@ export const actions = {
   setTaskActiveThunk: (task) => (dispatch) => {
     dispatch({ type: types.SET_TASK_ACTIVE, payload: task });
   },
-  setTaskAddedThunk: (boolean) => (dispatch) => {
-    dispatch({ type: types.TASK_ADDED, payload: boolean });
-  },
 };
 
 const taskInitialState = {

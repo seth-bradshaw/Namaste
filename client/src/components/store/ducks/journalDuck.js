@@ -27,6 +27,7 @@ export const types = {
   DELETE_JOURNAL_SUCCESS: "DELETE_JOURNAL_SUCCESS",
   DELETE_JOURNAL_ERROR: "DELETE_JOURNAL_ERROR",
   DELETE_JOURNAL_RESOLVE: "DELETE_JOURNAL_RESOLVE",
+  SET_JOURNAL_ACTIVE: "SET_JOURNAL_ACTIVE",
 };
 
 export const actions = {
@@ -94,6 +95,9 @@ export const actions = {
       .finally(() => {
         dispatch({ type: types.DELETE_JOURNAL_RESOLVE });
       });
+  },
+  setJournalActiveThunk: (journal) => (dispatch) => {
+    dispatch({ type: types.SET_JOURNAL_ACTIVE, payload: journal });
   },
 };
 
@@ -212,6 +216,11 @@ const journalReducer = (state = journalInitialState, action) => {
       return {
         ...state,
         status: "idle",
+      };
+    case types.SET_JOURNAL_ACTIVE:
+      return {
+        ...state,
+        journal: action.payload,
       };
     default:
       return state;
