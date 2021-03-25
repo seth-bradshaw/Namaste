@@ -7,7 +7,6 @@ const initialState = {
   title: "",
   description: "",
   severity: "",
-  description: "",
   user: {},
 };
 
@@ -15,13 +14,7 @@ export default function NewTaskForm(props) {
   const { modalAddActive, closeAddModal } = props;
   const [newTask, setNewTask] = useState(initialState);
   const activeUser = useSelector((state) => state.user.activeUser);
-  const isTaskAdded = useSelector((state) => state.task.taskAdded);
   const dispatch = useDispatch();
-
-  //   if (isTaskAdded === true) {
-  //     setmodalAddActive(false);
-  //     console.log("IN CONDITIONAL");
-  //   }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,20 +47,6 @@ export default function NewTaskForm(props) {
                 name="title"
                 value={newTask.title}
                 placeholder="Title"
-                onChange={(e) => handleChange(e)}
-              />
-            </Col>
-          </Form.Group>
-
-          <Form.Group as={Row} controlId="formHorizontalMood">
-            <Form.Label column sm={2}>
-              Mood
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control
-                name="mood"
-                value={newTask.mood}
-                placeholder="Mood"
                 onChange={(e) => handleChange(e)}
               />
             </Col>

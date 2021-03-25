@@ -20,7 +20,6 @@ function TaskDashboard() {
   }, []);
 
   useEffectAfterMount(() => {
-    console.log("inside mount");
     dispatch(taskActions.getTasksThunk(activeUser.userId));
   }, [modalAddActive]);
 

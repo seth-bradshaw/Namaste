@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { Nav, Navbar } from "react-bootstrap";
 
 const StyledLink = styled(Link)`
   margin: "auto",
@@ -36,5 +37,16 @@ export default function NavBar() {
       </div>
       <button>Menu</button>
     </div>
+    // <Navbar variant="light" bg="light">
+    //   <Navbar.Brand href="/dashboard">Navbar</Navbar.Brand>
+    //   <Nav defaultActiveKey="/home" as="ul">
+    //     <Nav.Item as="li">
+    //       <Nav.Link href="/task">Tasks</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item as="li">
+    //       <Nav.Link href="/journal">Journals</Nav.Link>
+    //     </Nav.Item>
+    //   </Nav>
+    // </Navbar>
   );
 }

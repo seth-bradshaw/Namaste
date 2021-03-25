@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 export default function JournalCard(props) {
-  const { journal } = props;
+  const { journal, handleJournalOpen } = props;
   return (
     <div>
       <Card style={{ width: "18rem" }}>
@@ -11,9 +11,15 @@ export default function JournalCard(props) {
           <Card.Subtitle className="mb-2 text-muted">
             {journal.mood}
           </Card.Subtitle>
-          <Card.Text>{journal.textBody}</Card.Text>
-          <Card.Link href="#">View Entry</Card.Link>
-          <Card.Link href="#">Edit Entry</Card.Link>
+          <Card.Link
+            as={"a"}
+            onClick={(e) => {
+              console.log(e);
+              handleJournalOpen(journal);
+            }}
+          >
+            Open
+          </Card.Link>
         </Card.Body>
       </Card>
     </div>
