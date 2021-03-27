@@ -4,11 +4,24 @@ import { Link } from "react-router-dom";
 import { actions as userActions } from "../store/ducks/userDuck";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 const initialState = {
   username: "",
   password: "",
 };
+
+const StyledHeader = styled.h2`
+  text-align: center;
+  color: #413d15;
+  font-family: Poppins;
+  margin-bottom: 5%;
+`;
+
+const StyledContainer = styled.div`
+  width: 30%;
+  margin: 5% auto auto auto;
+`;
 
 export default function Login() {
   const [credentials, setCredentials] = useState(initialState);
@@ -32,11 +45,10 @@ export default function Login() {
   };
 
   return (
-    <div style={{ width: "25%", margin: "auto" }}>
-      <h1>Namaste (logo)</h1>
+    <StyledContainer>
+      <StyledHeader>Log In To Happiness</StyledHeader>
       <Form onSubmit={(e) => submitHandler(e)}>
         <Form.Group as={Row} controlId="formHorizontalEmail">
-          <Form.Label sm={2}>Username</Form.Label>
           <Form.Control
             onChange={(e) => changeHandler(e)}
             placeholder="Username"
@@ -46,7 +58,6 @@ export default function Login() {
         </Form.Group>
 
         <Form.Group as={Row} controlId="formHorizontalPassword">
-          <Form.Label sm={2}>Password</Form.Label>
           <Form.Control
             name="password"
             value={credentials.password}
@@ -57,17 +68,24 @@ export default function Login() {
         </Form.Group>
 
         <Form.Group as={Row}>
-          <Button style={{ margin: "auto" }} type="submit">
-            Sign in
+          <Button
+            style={{
+              backgroundColor: "#fe6e00",
+              borderColor: "#fe6e00",
+              margin: "auto",
+            }}
+            type="submit"
+          >
+            Log In
           </Button>
         </Form.Group>
 
         <Form.Group as={Row}>
           <Link style={{ margin: "auto" }} to="/signup">
-            Don't already have an account? Sign up
+            Don't already have an account? Start your journey today
           </Link>
         </Form.Group>
       </Form>
-    </div>
+    </StyledContainer>
   );
 }

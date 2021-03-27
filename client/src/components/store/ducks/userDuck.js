@@ -27,6 +27,7 @@ export const types = {
   DELETE_USER_SUCCESS: "DELETE_USER_SUCCESS",
   DELETE_USER_ERROR: "DELETE_USER_ERROR",
   DELETE_USER_RESOLVE: "DELETE_USER_RESOLVE",
+  LOG_USER_OUT: "LOG_USER_OUT",
 };
 
 export const actions = {
@@ -99,6 +100,10 @@ export const actions = {
       .finally(() => {
         dispatch({ type: types.DELETE_USER_RESOLVE });
       });
+  },
+  logOutUserThunk: () => (dispatch) => {
+    dispatch({ type: types.LOG_USER_OUT });
+    localStorage.removeItem("token");
   },
 };
 
@@ -218,6 +223,10 @@ const userReducer = (state = userInitialState, action) => {
       return {
         ...state,
         status: "idle",
+      };
+    case types.LOG_USER_OUT:
+      return {
+        ...userInitialState,
       };
     default:
       return state;

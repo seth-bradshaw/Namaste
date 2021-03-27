@@ -6,8 +6,11 @@ export default function Dashboard() {
   const { status, activeUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  console.log(activeUser);
+
   useEffect(() => {
     dispatch(userActions.getUserThunk());
+    console.log("here");
   }, []);
   return <div></div>;
 }

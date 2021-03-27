@@ -4,10 +4,11 @@ import useModal from "../hooks/useModal";
 import useJournalEntry from "../hooks/useJournalEntry";
 import { useDispatch, useSelector } from "react-redux";
 import { actions as journalActions } from "../store/ducks/journalDuck";
-import JournalCard from "./JournalCard";
-import { CardColumns, Modal, Button, Form, Row, Col } from "react-bootstrap";
+import JournalCardContainer from "./JournalCardContainer";
+import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import NewJournalForm from "./NewJournalForm";
 import ExistingJournalForm from "./ExistingJournalForm";
+import styles from "styled-components";
 
 const initialState = {
   id: 0,
@@ -23,7 +24,7 @@ function JournalDashboard() {
   const [editorActive, openEditor, closeEditor] = useJournalEntry();
   const [singleJournalActive, openJournal, closeJournal] = useJournalEntry();
   const [modalActive, openModal, closeModal] = useModal();
-  const { journals, activeJournal } = useSelector((state) => state.journal);
+  const { journals, journal } = useSelector((state) => state.journal);
   const activeUser = useSelector((state) => state.user.activeUser);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function JournalDashboard() {
 
   useEffectAfterMount(() => {
     dispatch(journalActions.getJournalsThunk(activeUser.userId));
-  }, [editorActive]);
+  }, [editorActive, singleJournalActive]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +53,15 @@ function JournalDashboard() {
 
   const handleJournalEdit = (e) => {
     e.preventDefault();
-    dispatch(journalActions.putJournalThunk(newJournal.journalId, newJournal));
+    console.log(newJournal);
+    dispatch(
+      journalActions.putJournalThunk(journal.journalId, {
+        ...journal,
+        textBody: newJournal.textBody,
+      })
+    );
+    setTimeout(() => closeJournal(), 50);
+    setNewJournal(initialState);
   };
 
   const handleJournalOpen = (journal) => {
@@ -66,14 +75,11 @@ function JournalDashboard() {
     <div>
       <Modal show={modalActive} onHide={closeModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Just a few quick details</Modal.Title>
         </Modal.Header>
-        <div style={{ width: "95%", margin: "auto" }}>
+        <div style={{ width: "95%", margin: "2% auto" }}>
           <Form>
-            <Form.Group as={Row} controlId="formHorizontalEmail">
-              <Form.Label column sm={2}>
-                Title
-              </Form.Label>
+            <Form.Group as={Row}>
               <Col sm={10}>
                 <Form.Control
                   name="title"
@@ -84,15 +90,12 @@ function JournalDashboard() {
               </Col>
             </Form.Group>
 
-            <Form.Group as={Row} controlId="formHorizontalMood">
-              <Form.Label column sm={2}>
-                Mood
-              </Form.Label>
+            <Form.Group as={Row}>
               <Col sm={10}>
                 <Form.Control
                   name="mood"
                   value={newJournal.mood}
-                  placeholder="Mood"
+                  placeholder="How are you feeling?"
                   onChange={(e) => handleChange(e)}
                 />
               </Col>
@@ -100,17 +103,23 @@ function JournalDashboard() {
           </Form>
         </div>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button
+            variant="light"
+            onClick={() => {
+              closeModal();
+              setNewJournal(initialState);
+            }}
+          >
             Close
           </Button>
           <Button
-            variant="primary"
+            style={{ backgroundColor: "#FE6E00", borderColor: "#FE6E00" }}
             onClick={() => {
               closeModal();
               openEditor();
             }}
           >
-            New Journal
+            Start
           </Button>
         </Modal.Footer>
       </Modal>
@@ -119,33 +128,24 @@ function JournalDashboard() {
           handleSubmit={handleSubmit}
           newJournal={newJournal}
           setNewJournal={setNewJournal}
+          closeEditor={closeEditor}
+          initialState={initialState}
         />
       ) : singleJournalActive ? (
         <ExistingJournalForm
           handleSubmit={handleJournalEdit}
-          newJournal={newJournal}
+          newJournal={journal}
           setNewJournal={setNewJournal}
+          closeJournal={closeJournal}
+          initialState={initialState}
         />
       ) : (
-        <div>
-          <CardColumns>
-            {journals.length > 0 ? (
-              journals.map((jnl) => {
-                return (
-                  <>
-                    <JournalCard
-                      handleJournalOpen={handleJournalOpen}
-                      journal={jnl}
-                    />
-                  </>
-                );
-              })
-            ) : (
-              <p>loading...</p>
-            )}
-            <button onClick={() => openModal()}>add journal</button>
-          </CardColumns>
-        </div>
+        <JournalCardContainer
+          journals={journals}
+          handleJournalOpen={handleJournalOpen}
+          openModal={openModal}
+          activeUser={activeUser}
+        />
       )}
     </div>
   );
