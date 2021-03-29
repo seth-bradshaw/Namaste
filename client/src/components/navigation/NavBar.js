@@ -30,6 +30,7 @@ const StyledNavBar = styled.div`
   justify-content: left;
   padding: 0.5%;
   background-color: #f8f9fa;
+  border-bottom: 1px solid gray;
 `;
 
 const StyledNavContainer = styled.div`
@@ -54,7 +55,7 @@ export default function NavBar() {
       {loggedIn ? (
         <StyledNavContainer>
           <StyledLink to="/dashboard">Home</StyledLink>
-          <StyledLink to="/task">Tasks</StyledLink>
+          <StyledLink to="/testing">Tasks</StyledLink>
           <StyledLink to="/journal">Journals</StyledLink>
           <StyledLink to="/" onClick={() => handleSignOut()}>
             Sign Out

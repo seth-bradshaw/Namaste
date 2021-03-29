@@ -28,8 +28,12 @@ public class Task
 
     private String severity;
 
+    @OneToOne
+    @JsonIgnoreProperties(value = {"task"}, allowSetters = true)
+    private TaskDate taskDate;
+
     @ManyToOne
-    @JsonIgnoreProperties(value = {"roles", "journals"})
+    @JsonIgnoreProperties(value = {"roles", "journals"}, allowSetters = true)
     private User user;
 
     @ManyToOne

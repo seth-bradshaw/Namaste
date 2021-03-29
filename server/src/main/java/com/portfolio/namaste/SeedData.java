@@ -35,6 +35,9 @@ public class SeedData implements CommandLineRunner
     @Autowired
     private UserRolesService userRolesService;
 
+    @Autowired
+    private TaskDateService dateService;
+
     @Transactional
     @Override public void run(String... args) throws Exception
     {
@@ -80,27 +83,58 @@ public class SeedData implements CommandLineRunner
         u3.getRoles().add(new UserRoles(u3, r3));
         u3 = userService.save(u3);
 
+        TaskDate d1 = new TaskDate();
+        d1.setYear(2021);
+        d1.setMonth(3);
+        d1.setDay(27);
+        d1.setStartTime(12);
+        d1.setEndTime(12);
+        d1 = dateService.save(d1);
+
+        TaskDate d2 = new TaskDate();
+        d2.setYear(2021);
+        d2.setMonth(3);
+        d2.setDay(28);
+        d2.setStartTime(12);
+        d2.setEndTime(12);
+        d2 = dateService.save(d2);
+
+        TaskDate d3 = new TaskDate();
+        d3.setYear(2021);
+        d3.setMonth(3);
+        d3.setDay(29);
+        d3.setStartTime(12);
+        d3.setEndTime(12);
+        d3 = dateService.save(d3);
+
         Task t1 = new Task();
         t1.setTitle("THIS IS TICKET 1");
         t1.setDescription("I encountered my first error!");
         t1.setSeverity("uno");
         t1.setUser(u2);
+        System.out.println(d1);
+        t1.setTaskDate(d1);
         t1 = taskService.save(t1);
+        d1.setTask(t1);
+        d1 = dateService.save(d1);
 
         Task t2 = new Task();
         t2.setTitle("THIS IS TICKET 2");
         t2.setDescription("I encountered my first error!");
         t2.setSeverity("uno");
         t2.setUser(u2);
+        t2.setTaskDate(d2);
         t2 = taskService.save(t2);
+        d2 = dateService.save(d2);
 
         Task t3 = new Task();
         t3.setTitle("THIS IS TICKET 3");
         t3.setDescription("I encountered my first error!");
         t3.setSeverity("uno");
         t3.setUser(u1);
+        t3.setTaskDate(d3);
         t3 = taskService.save(t3);
-
+        d3 = dateService.save(d3);
 
         Status s1 = new Status();
         s1.setStatusType("Not Started");

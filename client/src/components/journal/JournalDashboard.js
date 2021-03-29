@@ -8,7 +8,6 @@ import JournalCardContainer from "./JournalCardContainer";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import NewJournalForm from "./NewJournalForm";
 import ExistingJournalForm from "./ExistingJournalForm";
-import styles from "styled-components";
 
 const initialState = {
   id: 0,
@@ -45,7 +44,7 @@ function JournalDashboard() {
     dispatch(
       journalActions.postJournalThunk({ ...newJournal, user: activeUser })
     );
-    setTimeout(function () {
+    setTimeout(() => {
       closeEditor();
     }, 30);
     setNewJournal(initialState);
