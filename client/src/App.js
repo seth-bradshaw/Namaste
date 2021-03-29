@@ -7,6 +7,7 @@ import SignUp from "./components/auth/SignUp";
 import JournalDashboard from "./components/journal/JournalDashboard";
 import TaskDashboard from "./components/task/TaskDashboard";
 import Dashboard from "./components/Dashboard";
+import TestCalendar from "./components/task/calendar/TestCalendar";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/journal" component={JournalDashboard} />
         <Route path="/task" component={TaskDashboard} />
+        <Route path="/testing" component={TestCalendar} />
       </Switch>
     </div>
   );
