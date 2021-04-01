@@ -1,7 +1,6 @@
 package com.portfolio.namaste.services;
 
 import com.portfolio.namaste.models.Task;
-import com.portfolio.namaste.models.TaskDate;
 import com.portfolio.namaste.models.User;
 import com.portfolio.namaste.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ public class TaskServiceImpl implements TaskService
     @Autowired
     private StatusService statusService;
 
-    @Autowired
-    private TaskDateService dateService;
 
     @Override
     public Task save(Task task)
@@ -40,18 +37,10 @@ public class TaskServiceImpl implements TaskService
         newTask.setTitle(task.getTitle());
         newTask.setDescription(task.getDescription());
         newTask.setSeverity(task.getSeverity());
-
-        if (task.getTaskDate() != null)
-        {
-            if ( task.getTaskDate().getDateId() != 0)
-            {
-                dateService.findDateById(task.getTaskDate().getDateId());
-                newTask.setTaskDate(task.getTaskDate());
-            } else {
-                TaskDate newDate = dateService.save(task.getTaskDate());
-                newTask.setTaskDate(newDate);
-            }
-        }
+        newTask.setStartDate(task.getStartDate());
+        newTask.setEndDate(task.getEndDate());
+        newTask.setStartTime(task.getStartTime());
+        newTask.setEndTime(task.getEndTime());
 
         if (task.getStatus() != null)
         {

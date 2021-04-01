@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService
             Task addTask = taskService.findTaskById(t.getTaskId());
 
             newUser.getTasks()
-                    .add(new Task(addTask.getTaskId(), addTask.getTitle(), addTask.getDescription(), addTask.getSeverity(), addTask.getTaskDate(), newUser, addTask.getStatus() ));
+                    .add(new Task(addTask.getTaskId(), addTask.getTitle(), addTask.getDescription(), addTask.getSeverity(), addTask.getStartDate(), addTask.getEndDate(), addTask.getStartTime(), addTask.getEndTime(), newUser, addTask.getStatus() ));
         }
 
         newUser.getJournals().clear();
