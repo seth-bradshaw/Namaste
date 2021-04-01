@@ -20,3 +20,4 @@ The purpose behind this application is to provide users with a resource to impro
 
 ## Bugs
 * When adding a task or journal locally the dashboard will render the new task/journal right away, however since deploying to heroku there has been an issue where that works half the time due to the longer response time from herokus servers. If you don't see your journal/task being added right away, please click onto another page and go back to the previous dashboard, then it should be there.
+    * This bug should be mostly resolved. I used a setTimeout method to delay the change of state that triggers a re-render on the dashboard. Once release 1 is done the re-render will be triggered by the status of the API request.
