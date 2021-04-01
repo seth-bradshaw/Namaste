@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.portfolio</groupId>
-    <artifactId>bugtracker</artifactId>
+    <artifactId>namaste</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Namaste</name>
     <description>This is an all purpose self-help application</description>
@@ -74,16 +74,10 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
-        <!-- Security Dependencies End -->
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-core</artifactId>-->
-<!--            <version>5.3.7.Final</version>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>
-        <finalName>namasteServer</finalName>
+        <finalName>namaste-server</finalName>
         <plugins>
             <plugin>
                 <groupId>com.heroku.sdk</groupId>

@@ -35,9 +35,6 @@ public class SeedData implements CommandLineRunner
     @Autowired
     private UserRolesService userRolesService;
 
-    @Autowired
-    private TaskDateService dateService;
-
     @Transactional
     @Override public void run(String... args) throws Exception
     {
@@ -51,8 +48,8 @@ public class SeedData implements CommandLineRunner
         r3 = roleService.save(r3);
 
         User u1 = new User();
-        u1.setFirstName("user1");
-        u1.setLastName("last");
+        u1.setFirstName("Admin");
+        u1.setLastName("Istrator");
         u1.setUsername("admin");
         u1.setPasswordEncrypt("password");
         u1.setEmail("admin@example.com");
@@ -63,11 +60,11 @@ public class SeedData implements CommandLineRunner
         u1 = userService.save(u1);
 
         User u2 = new User();
-        u2.setFirstName("user2");
-        u2.setLastName("last");
-        u2.setUsername("user2");
+        u2.setFirstName("Seth");
+        u2.setLastName("Bradshaw");
+        u2.setUsername("sethbrad");
         u2.setPasswordEncrypt("password");
-        u2.setEmail("user1@example.com");
+        u2.setEmail("sethbradshaw@example.com");
         u2.getRoles().clear();
         u2.getRoles().add(new UserRoles(u2, r2));
         u2 = userService.save(u2);
@@ -83,58 +80,51 @@ public class SeedData implements CommandLineRunner
         u3.getRoles().add(new UserRoles(u3, r3));
         u3 = userService.save(u3);
 
-        TaskDate d1 = new TaskDate();
-        d1.setYear(2021);
-        d1.setMonth(3);
-        d1.setDay(27);
-        d1.setStartTime(12);
-        d1.setEndTime(12);
-        d1 = dateService.save(d1);
 
-        TaskDate d2 = new TaskDate();
-        d2.setYear(2021);
-        d2.setMonth(3);
-        d2.setDay(28);
-        d2.setStartTime(12);
-        d2.setEndTime(12);
-        d2 = dateService.save(d2);
-
-        TaskDate d3 = new TaskDate();
-        d3.setYear(2021);
-        d3.setMonth(3);
-        d3.setDay(29);
-        d3.setStartTime(12);
-        d3.setEndTime(12);
-        d3 = dateService.save(d3);
 
         Task t1 = new Task();
-        t1.setTitle("THIS IS TICKET 1");
-        t1.setDescription("I encountered my first error!");
-        t1.setSeverity("uno");
+        t1.setTitle("Chris's birthday party");
+        t1.setDescription("The party is at his house. Bring cake and icecream, as well as a gift.");
+        t1.setSeverity("low");
         t1.setUser(u2);
-        System.out.println(d1);
-        t1.setTaskDate(d1);
+        t1.setStartDate("03-29-2021");
+        t1.setEndDate("03-29-2021");
+        t1.setStartTime("12");
+        t1.setEndTime("15");
         t1 = taskService.save(t1);
-        d1.setTask(t1);
-        d1 = dateService.save(d1);
 
         Task t2 = new Task();
-        t2.setTitle("THIS IS TICKET 2");
-        t2.setDescription("I encountered my first error!");
-        t2.setSeverity("uno");
+        t2.setTitle("Web Development Seminar");
+        t2.setDescription("Get ready to learn a lot. Study some of the concepts beforehand.");
+        t2.setSeverity("medium");
         t2.setUser(u2);
-        t2.setTaskDate(d2);
+        t2.setStartDate("03-30-2021");
+        t2.setEndDate("03-30-2021");
+        t2.setStartTime("8");
+        t2.setEndTime("17");
         t2 = taskService.save(t2);
-        d2 = dateService.save(d2);
 
         Task t3 = new Task();
-        t3.setTitle("THIS IS TICKET 3");
-        t3.setDescription("I encountered my first error!");
+        t3.setTitle("Dentist Appointment");
+        t3.setDescription("Just a normal check up. Please don't have any cavities!!");
         t3.setSeverity("uno");
-        t3.setUser(u1);
-        t3.setTaskDate(d3);
+        t3.setUser(u2);
+        t3.setStartDate("04-05-2021");
+        t3.setEndDate("04-05-2021");
+        t3.setStartTime("13");
+        t3.setEndTime("14");
         t3 = taskService.save(t3);
-        d3 = dateService.save(d3);
+
+        Task t4 = new Task();
+        t4.setTitle("Kaela's soccer tournament");
+        t4.setDescription("The tournament is located at 1234 N Main St, City. Bring snacks for the team post game.");
+        t4.setSeverity("uno");
+        t4.setUser(u2);
+        t4.setStartDate("04-05-2021");
+        t4.setEndDate("04-06-2021");
+        t4.setStartTime("10");
+        t4.setEndTime("17");
+        t4 = taskService.save(t4);
 
         Status s1 = new Status();
         s1.setStatusType("Not Started");

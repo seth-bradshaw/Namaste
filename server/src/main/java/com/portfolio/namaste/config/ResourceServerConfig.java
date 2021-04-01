@@ -66,24 +66,24 @@ public class ResourceServerConfig
 						"/createnewuser",
                         "/login")
 				.permitAll()
-//				.antMatchers("/oauth/revoke-token",
-//						"/logout")
-//				.authenticated()
-//        		//users
-//				.antMatchers("/users/**")
-//				.hasAnyRole("ADMIN", "USER", "DATA")
-//				//tickets
-//				.antMatchers( "/tasks/**")
-//				.hasAnyRole("ADMIN", "USER", "DATA")
-//				//companys
-//				.antMatchers("/companies/**")
-//				.hasAnyRole("ADMIN", "USER", "DATA")
-//				//statuses
-//				.antMatchers("/journals/**")
-//				.hasAnyRole("ADMIN", "USER", "DATA")
-//				//categories
-//				.antMatchers("/statuses/**")
-//				.hasAnyRole("ADMIN", "USER", "DATA")
+				.antMatchers("/oauth/revoke-token",
+						"/logout")
+				.authenticated()
+        		//users
+				.antMatchers("/users/**")
+				.hasAnyRole("ADMIN", "USER", "DATA")
+				//tickets
+				.antMatchers( "/tasks/**")
+				.hasAnyRole("ADMIN", "USER", "DATA")
+				//companys
+				.antMatchers("/companies/**")
+				.hasAnyRole("ADMIN", "USER", "DATA")
+				//statuses
+				.antMatchers("/journals/**")
+				.hasAnyRole("ADMIN", "USER", "DATA")
+				//categories
+				.antMatchers("/statuses/**")
+				.hasAnyRole("ADMIN", "USER", "DATA")
 				.and()
 				.exceptionHandling()
 				.accessDeniedHandler(new OAuth2AccessDeniedHandler());
