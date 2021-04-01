@@ -17,5 +17,6 @@ The purpose behind this application is to provide users with a resource to impro
 * Login/Signup (I would suggest logging in to the following account to see populated data) <br>
     * Username: **sethbrad**
     * Password: *password*
-       
-    
+
+## Bugs
+* When adding a task or journal locally the dashboard will render the new task/journal right away, however since deploying to heroku there has been an issue where that works half the time due to the longer response time from herokus servers. If you don't see your journal/task being added right away, please click onto another page and go back to the previous dashboard, then it should be there.
