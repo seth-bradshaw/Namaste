@@ -6,7 +6,8 @@ import { actions as taskActions } from "../../store/ducks/taskDuck";
 const initialState = {
   title: "",
   description: "",
-  date: "",
+  startDate: "",
+  endDate: "",
   startTime: "",
   endTime: "",
   severity: "",
@@ -22,44 +23,16 @@ export default function TestTaskForm(props) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewTask({ ...newTask, [name]: value });
-    console.log(newTask);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let dateArray = newTask.date.split("/");
-    const dateObj = {
-      year: 0,
-      month: 0,
-      day: 0,
-      startTime: 0,
-      endTime: 0,
-    };
-    for (let x = 0; x < dateArray.length; x++) {
-      if (x === 0) {
-        dateObj.year = parseInt(dateArray[0]);
-      } else if (x === 1) {
-        dateObj.month = parseInt(dateArray[1]);
-      } else {
-        dateObj.day = parseInt(dateArray[2]);
-      }
-    }
-
-    const saveObj = {
-      title: newTask.title,
-      description: newTask.description,
-      severity: newTask.severity,
-      taskDate: {
-        ...dateObj,
-        startTime: newTask.startTime,
-        endTime: newTask.endTime,
-      },
-      user: activeUser,
-    };
-
-    console.log(saveObj);
-
-    dispatch(taskActions.postTaskThunk(saveObj));
+    dispatch(
+      taskActions.postTaskThunk({
+        ...newTask,
+        user: activeUser,
+      })
+    );
     setNewTask(initialState);
     setTimeout(() => closeAddModal(), 30);
   };
@@ -88,14 +61,28 @@ export default function TestTaskForm(props) {
 
           <Form.Group as={Row} controlId="formHorizontalMood">
             <Form.Label column sm={2}>
-              Date
+              Start Date
             </Form.Label>
             <Col sm={10}>
               <Form.Control
-                name="date"
-                value={newTask.date}
+                name="startDate"
+                value={newTask.startDate}
                 onChange={(e) => handleChange(e)}
-                placeholder="Please enter in format YYYY/MM/DD"
+                placeholder="Please enter in format MM-DD-YYYY"
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="formHorizontalMood">
+            <Form.Label column sm={2}>
+              End Date
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                name="endDate"
+                value={newTask.endDate}
+                onChange={(e) => handleChange(e)}
+                placeholder="Please enter in format MM-DD-YYYY"
               />
             </Col>
           </Form.Group>

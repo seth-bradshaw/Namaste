@@ -9,6 +9,7 @@ import TestTaskForm from "./TestTaskForm";
 import useModal from "../../hooks/useModal";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+// moment.locale = "en-US";
 const localizer = momentLocalizer(moment);
 
 const myEventsList = [
@@ -27,8 +28,9 @@ export default function TestCalendar() {
     dispatch(taskActions.getTasksThunk(activeUser.userId));
   }, [modalAddActive]);
 
+  console.log({ moment });
+
   const onTaskClick = (data) => {
-    console.log(data);
     dispatch(taskActions.setTaskActiveThunk(data.task));
     setTimeout(() => setShow(true), 30);
   };
@@ -38,18 +40,21 @@ export default function TestCalendar() {
   };
 
   const myEventsListTry = tasks.map((tsk) => {
+    const startDateArr = tsk.startDate.split("-");
+    const endDateArr = tsk.endDate.split("-");
+
     return {
       start: new Date(
-        tsk.taskDate.year,
-        tsk.taskDate.month - 1,
-        tsk.taskDate.day,
-        tsk.taskDate.startTime
+        parseInt(startDateArr[2]),
+        parseInt(startDateArr[0]) - 1,
+        parseInt(startDateArr[1]),
+        parseInt(tsk.startTime)
       ),
       end: new Date(
-        tsk.taskDate.year,
-        tsk.taskDate.month - 1,
-        tsk.taskDate.day,
-        tsk.taskDate.endTime
+        parseInt(endDateArr[2]),
+        parseInt(endDateArr[0]) - 1,
+        parseInt(endDateArr[1]),
+        parseInt(tsk.endTime)
       ),
       title: tsk.title,
       task: tsk,
