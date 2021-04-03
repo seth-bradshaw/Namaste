@@ -46,8 +46,8 @@ function JournalDashboard() {
     );
     setTimeout(() => {
       closeEditor();
-    }, 30);
-    setNewJournal(initialState);
+      setNewJournal(initialState);
+    }, 100);
   };
 
   const handleJournalEdit = (e) => {

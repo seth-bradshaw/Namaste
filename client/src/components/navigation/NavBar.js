@@ -30,7 +30,7 @@ const StyledNavBar = styled.div`
   justify-content: left;
   padding: 0.5%;
   background-color: #f8f9fa;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #0e1111;
 `;
 
 const StyledNavContainer = styled.div`
@@ -55,13 +55,20 @@ export default function NavBar() {
       {loggedIn ? (
         <StyledNavContainer>
           <StyledLink to="/dashboard">Home</StyledLink>
-          <StyledLink to="/testing">Tasks</StyledLink>
+          <StyledLink to="/task">Tasks</StyledLink>
           <StyledLink to="/journal">Journals</StyledLink>
           <StyledLink to="/" onClick={() => handleSignOut()}>
             Sign Out
           </StyledLink>
         </StyledNavContainer>
-      ) : null}
+      ) : (
+        <StyledNavContainer>
+          <StyledLink to="/contact">Contact</StyledLink>
+          <StyledLink to="/login" onClick={() => handleSignOut()}>
+            Sign In
+          </StyledLink>
+        </StyledNavContainer>
+      )}
     </StyledNavBar>
   );
 }

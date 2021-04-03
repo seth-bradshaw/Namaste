@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { CardColumns, Card, Button, Form, Col } from "react-bootstrap";
 import JournalCard from "./JournalCard";
 
+const StyledPageContainer = styled.div`
+  margin: 5% auto 7.5% auto;
+`;
+
 const StyledCardContainer = styled.div`
   width: 100%;
   padding: 1%;
@@ -54,7 +58,7 @@ export default function JournalCardContainer(props) {
   };
 
   return (
-    <>
+    <StyledPageContainer>
       <StyledHeader>{activeUser.username}'s Journals</StyledHeader>
       <StyledContainer>
         <StyledMenuBar>
@@ -95,7 +99,11 @@ export default function JournalCardContainer(props) {
                 </Card.Title>
                 <Button
                   variant="light"
-                  style={{ fontWeight: "bolder", color: "#232b2b" }}
+                  style={{
+                    fontWeight: "bolder",
+                    color: "#232b2b",
+                    borderRadius: "25px",
+                  }}
                   onClick={() => openModal()}
                 >
                   +
@@ -132,6 +140,6 @@ export default function JournalCardContainer(props) {
           </CardColumns>
         </StyledCardContainer>
       </StyledContainer>
-    </>
+    </StyledPageContainer>
   );
 }

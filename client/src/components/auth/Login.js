@@ -11,16 +11,20 @@ const initialState = {
   password: "",
 };
 
-const StyledHeader = styled.h2`
+const StyledTitle = styled.h2`
   text-align: center;
   color: #413d15;
   font-family: Poppins;
-  margin-bottom: 5%;
+  margin-bottom: 12.5%;
 `;
 
 const StyledContainer = styled.div`
   width: 30%;
-  margin: 5% auto auto auto;
+  margin: 9.5% auto 9.5% auto;
+  padding: 5%;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #f8f9fa;
 `;
 
 export default function Login() {
@@ -46,7 +50,7 @@ export default function Login() {
 
   return (
     <StyledContainer>
-      <StyledHeader>Log In To Happiness</StyledHeader>
+      <StyledTitle>Log In To Happiness</StyledTitle>
       <Form onSubmit={(e) => submitHandler(e)}>
         <Form.Group as={Row} controlId="formHorizontalEmail">
           <Form.Control
@@ -73,6 +77,8 @@ export default function Login() {
               backgroundColor: "#fe6e00",
               borderColor: "#fe6e00",
               margin: "auto",
+              borderRadius: "25px",
+              width: "100px",
             }}
             type="submit"
           >

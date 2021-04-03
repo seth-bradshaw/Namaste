@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Row, Col, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { actions as taskActions } from "../../store/ducks/taskDuck";
+import { actions as taskActions } from "../store/ducks/taskDuck";
 
 const initialState = {
   title: "",
@@ -14,7 +14,7 @@ const initialState = {
   user: {},
 };
 
-export default function TestTaskForm(props) {
+export default function TaskForm(props) {
   const { modalAddActive, closeAddModal } = props;
   const [newTask, setNewTask] = useState(initialState);
   const activeUser = useSelector((state) => state.user.activeUser);
@@ -34,7 +34,7 @@ export default function TestTaskForm(props) {
       })
     );
     setNewTask(initialState);
-    setTimeout(() => closeAddModal(), 30);
+    setTimeout(() => closeAddModal(), 100);
   };
 
   return (

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { actions as taskActions } from "../../store/ducks/taskDuck";
+import { actions as taskActions } from "../store/ducks/taskDuck";
 import { Button } from "react-bootstrap";
-import TestCalendarTask from "./TestCalendarTask";
-import TestTaskForm from "./TestTaskForm";
-import useModal from "../../hooks/useModal";
+import SingleTask from "./SingleTask";
+import TaskForm from "./TaskForm";
+import useModal from "../hooks/useModal";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 // moment.locale = "en-US";
@@ -16,7 +16,7 @@ const myEventsList = [
   { start: new Date(), end: new Date(), title: "special event" },
 ];
 
-export default function TestCalendar() {
+export default function TaskCalendar() {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [modalAddActive, openAddModal, closeAddModal] = useModal();
@@ -64,12 +64,12 @@ export default function TestCalendar() {
   return (
     <div style={{ margin: "2% auto", width: "80%" }}>
       {show ? (
-        <TestCalendarTask show={show} closeViewModal={closeViewModal} />
+        <SingleTask show={show} closeViewModal={closeViewModal} />
       ) : (
         <></>
       )}
       {modalAddActive ? (
-        <TestTaskForm
+        <TaskForm
           modalAddActive={modalAddActive}
           closeAddModal={closeAddModal}
         />

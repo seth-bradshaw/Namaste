@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { actions as userActions } from "../store/ducks/userDuck";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 const initialState = {
   firstName: "",
@@ -12,6 +13,22 @@ const initialState = {
   username: "",
   password: "",
 };
+
+const StyledTitle = styled.h2`
+  text-align: center;
+  color: #413d15;
+  font-family: Poppins;
+  margin-bottom: 10%;
+`;
+
+const StyledContainer = styled.div`
+  width: 30%;
+  margin: 6% auto 6% auto;
+  padding: 5%;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #f8f9fa;
+`;
 
 export default function SignUp() {
   const [newUser, setNewUser] = useState(initialState);
@@ -35,8 +52,8 @@ export default function SignUp() {
   };
 
   return (
-    <div style={{ width: "25%", margin: "auto" }}>
-      <h1>Namaste (logo)</h1>
+    <StyledContainer>
+      <StyledTitle>Sign Up</StyledTitle>
       <Form onSubmit={(e) => submitHandler(e)}>
         <Form.Row>
           <Form.Group as={Col}>
@@ -95,17 +112,26 @@ export default function SignUp() {
         </Form.Row>
 
         <Form.Group as={Row}>
-          <Button style={{ margin: "auto" }} variant="primary" type="submit">
+          <Button
+            style={{
+              backgroundColor: "#fe6e00",
+              borderColor: "#fe6e00",
+              margin: "auto",
+              borderRadius: "25px",
+              width: "100px",
+            }}
+            type="submit"
+          >
             Sign Up
           </Button>
         </Form.Group>
 
         <Form.Group as={Row}>
-          <Link style={{ margin: "auto" }} to="/">
+          <Link style={{ margin: "auto" }} to="/login">
             Already have an account? Log in
           </Link>
         </Form.Group>
       </Form>
-    </div>
+    </StyledContainer>
   );
 }
