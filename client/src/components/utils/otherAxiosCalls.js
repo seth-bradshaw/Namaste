@@ -3,7 +3,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const authBaseAxiosCall = () => {
   return axios.create({
-    baseURL: "http://localhost:2019",
+    baseURL: "https://namaste-server.herokuapp.com",
   });
 };
 

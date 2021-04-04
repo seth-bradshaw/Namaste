@@ -7,6 +7,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: token,
     },
-    baseURL: "http://localhost:2019",
+    baseURL: "https://namaste-server.herokuapp.com",
   });
 };

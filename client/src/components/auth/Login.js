@@ -11,16 +11,34 @@ const initialState = {
   password: "",
 };
 
-const StyledHeader = styled.h2`
+const StyledTitle = styled.h2`
   text-align: center;
   color: #413d15;
   font-family: Poppins;
-  margin-bottom: 5%;
+  margin-bottom: 12.5%;
 `;
 
-const StyledContainer = styled.div`
-  width: 30%;
-  margin: 5% auto auto auto;
+const StyledCard = styled.div`
+  width: 750px;
+  padding: 5%;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 0% auto 9.5% auto;
+  background-color: #f8f9fa;
+`;
+
+const StyledCardHeaderBar = styled.div`
+  background-color: #fe6e00;
+  height: 100px;
+  width: 100%;
+`;
+
+const StyledContentContainer = styled.div`
+  width: 100%;
+  padding: 0% 2% 0% 2%;
+  margin: 8% 0% 8% 0%;
+  display: flex;
+  justifycontent: center;
 `;
 
 export default function Login() {
@@ -45,47 +63,56 @@ export default function Login() {
   };
 
   return (
-    <StyledContainer>
-      <StyledHeader>Log In To Happiness</StyledHeader>
-      <Form onSubmit={(e) => submitHandler(e)}>
-        <Form.Group as={Row} controlId="formHorizontalEmail">
-          <Form.Control
-            onChange={(e) => changeHandler(e)}
-            placeholder="Username"
-            name="username"
-            value={credentials.username}
-          />
-        </Form.Group>
+    <StyledContentContainer>
+      <StyledCard>
+        <StyledTitle>Log In</StyledTitle>
+        <Form
+          onSubmit={(e) => submitHandler(e)}
+          style={{ width: "60%", margin: "auto" }}
+        >
+          <Form.Group as={Row} controlId="formHorizontalEmail">
+            <Form.Control
+              onChange={(e) => changeHandler(e)}
+              placeholder="Username"
+              name="username"
+              value={credentials.username}
+            />
+          </Form.Group>
 
-        <Form.Group as={Row} controlId="formHorizontalPassword">
-          <Form.Control
-            name="password"
-            value={credentials.password}
-            onChange={(e) => changeHandler(e)}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
+          <Form.Group as={Row} controlId="formHorizontalPassword">
+            <Form.Control
+              name="password"
+              value={credentials.password}
+              onChange={(e) => changeHandler(e)}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Group>
 
-        <Form.Group as={Row}>
-          <Button
-            style={{
-              backgroundColor: "#fe6e00",
-              borderColor: "#fe6e00",
-              margin: "auto",
-            }}
-            type="submit"
-          >
-            Log In
-          </Button>
-        </Form.Group>
+          <Form.Group as={Row}>
+            <Button
+              type="submit"
+              style={{
+                backgroundColor: "#fe6e00",
+                borderColor: "#fe6e00",
+                margin: "5% auto 2% auto",
+                borderRadius: "25px",
+                width: "90%",
+                fontFamily: "Poppins",
+                fontWeight: "Bold",
+              }}
+            >
+              Submit
+            </Button>
+          </Form.Group>
 
-        <Form.Group as={Row}>
-          <Link style={{ margin: "auto" }} to="/signup">
-            Don't already have an account? Start your journey today
-          </Link>
-        </Form.Group>
-      </Form>
-    </StyledContainer>
+          <Form.Group as={Row}>
+            <Link style={{ margin: "auto", textAlign: "center" }} to="/signup">
+              Don't already have an account? Start your journey today.
+            </Link>
+          </Form.Group>
+        </Form>
+      </StyledCard>
+    </StyledContentContainer>
   );
 }

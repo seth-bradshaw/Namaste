@@ -6,11 +6,15 @@ import { actions as taskActions } from "../store/ducks/taskDuck";
 const initialState = {
   title: "",
   description: "",
+  startDate: "",
+  endDate: "",
+  startTime: "",
+  endTime: "",
   severity: "",
   user: {},
 };
 
-export default function NewTaskForm(props) {
+export default function TaskForm(props) {
   const { modalAddActive, closeAddModal } = props;
   const [newTask, setNewTask] = useState(initialState);
   const activeUser = useSelector((state) => state.user.activeUser);
@@ -23,11 +27,14 @@ export default function NewTaskForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(taskActions.postTaskThunk({ ...newTask, user: activeUser }));
+    dispatch(
+      taskActions.postTaskThunk({
+        ...newTask,
+        user: activeUser,
+      })
+    );
     setNewTask(initialState);
-    setTimeout(function () {
-      closeAddModal();
-    }, 30);
+    setTimeout(() => closeAddModal(), 100);
   };
 
   return (
@@ -48,6 +55,62 @@ export default function NewTaskForm(props) {
                 value={newTask.title}
                 placeholder="Title"
                 onChange={(e) => handleChange(e)}
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="formHorizontalMood">
+            <Form.Label column sm={2}>
+              Start Date
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                name="startDate"
+                value={newTask.startDate}
+                onChange={(e) => handleChange(e)}
+                placeholder="Please enter in format MM-DD-YYYY"
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="formHorizontalMood">
+            <Form.Label column sm={2}>
+              End Date
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                name="endDate"
+                value={newTask.endDate}
+                onChange={(e) => handleChange(e)}
+                placeholder="Please enter in format MM-DD-YYYY"
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="formHorizontalMood">
+            <Form.Label column sm={2}>
+              Start Time
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                name="startTime"
+                value={newTask.startTime}
+                onChange={(e) => handleChange(e)}
+                placeholder="Only enter the hour"
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="formHorizontalMood">
+            <Form.Label column sm={2}>
+              End Time
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                name="endTime"
+                value={newTask.endTime}
+                onChange={(e) => handleChange(e)}
+                placeholder="Only enter the hour"
               />
             </Col>
           </Form.Group>
@@ -90,22 +153,6 @@ export default function NewTaskForm(props) {
         <Button variant="primary" onClick={(e) => handleSubmit(e)}>
           Add
         </Button>
-        {/* {isTaskAdded === false ? (
-          <Button variant="primary" onClick={(e) => handleSubmit(e)}>
-            Add
-          </Button>
-        ) : (
-          <Button variant="primary" disabled>
-            <Spinner
-              as="span"
-              animation="grow"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-            />
-            Loading...
-          </Button>
-        )} */}
       </Modal.Footer>
     </Modal>
   );

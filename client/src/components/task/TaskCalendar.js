@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { actions as taskActions } from "../../store/ducks/taskDuck";
+import { actions as taskActions } from "../store/ducks/taskDuck";
 import { Button } from "react-bootstrap";
-import TestCalendarTask from "./TestCalendarTask";
-import TestTaskForm from "./TestTaskForm";
-import useModal from "../../hooks/useModal";
+import SingleTask from "./SingleTask";
+import TaskForm from "./TaskForm";
+import useModal from "../hooks/useModal";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+// moment.locale = "en-US";
 const localizer = momentLocalizer(moment);
 
 const myEventsList = [
   { start: new Date(), end: new Date(), title: "special event" },
 ];
 
-export default function TestCalendar() {
+export default function TaskCalendar() {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [modalAddActive, openAddModal, closeAddModal] = useModal();
@@ -27,8 +28,9 @@ export default function TestCalendar() {
     dispatch(taskActions.getTasksThunk(activeUser.userId));
   }, [modalAddActive]);
 
+  console.log({ moment });
+
   const onTaskClick = (data) => {
-    console.log(data);
     dispatch(taskActions.setTaskActiveThunk(data.task));
     setTimeout(() => setShow(true), 30);
   };
@@ -38,18 +40,21 @@ export default function TestCalendar() {
   };
 
   const myEventsListTry = tasks.map((tsk) => {
+    const startDateArr = tsk.startDate.split("-");
+    const endDateArr = tsk.endDate.split("-");
+
     return {
       start: new Date(
-        tsk.taskDate.year,
-        tsk.taskDate.month - 1,
-        tsk.taskDate.day,
-        tsk.taskDate.startTime
+        parseInt(startDateArr[2]),
+        parseInt(startDateArr[0]) - 1,
+        parseInt(startDateArr[1]),
+        parseInt(tsk.startTime)
       ),
       end: new Date(
-        tsk.taskDate.year,
-        tsk.taskDate.month - 1,
-        tsk.taskDate.day,
-        tsk.taskDate.endTime
+        parseInt(endDateArr[2]),
+        parseInt(endDateArr[0]) - 1,
+        parseInt(endDateArr[1]),
+        parseInt(tsk.endTime)
       ),
       title: tsk.title,
       task: tsk,
@@ -59,12 +64,12 @@ export default function TestCalendar() {
   return (
     <div style={{ margin: "2% auto", width: "80%" }}>
       {show ? (
-        <TestCalendarTask show={show} closeViewModal={closeViewModal} />
+        <SingleTask show={show} closeViewModal={closeViewModal} />
       ) : (
         <></>
       )}
       {modalAddActive ? (
-        <TestTaskForm
+        <TaskForm
           modalAddActive={modalAddActive}
           closeAddModal={closeAddModal}
         />

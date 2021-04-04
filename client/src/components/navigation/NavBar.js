@@ -4,12 +4,13 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { actions as userActions } from "../store/ducks/userDuck";
 
-const StyledHeader = styled.h1`
+const StyledTitle = styled.h1`
   font-size: 28px;
   font-family: Poppins;
   color: #fe6e00;
-  margin: 0px;
+  margin: auto 0% auto 0%;
   font-weight: bolder;
+  width: 7.5%;
 `;
 
 const StyledLink = styled(Link)`
@@ -27,17 +28,23 @@ const StyledLink = styled(Link)`
 
 const StyledNavBar = styled.div`
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   padding: 0.5%;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid gray;
 `;
 
 const StyledNavContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  width: 80%;
-  align-items: center;
+  width: 60%;
+  margin: auto auto auto auto;
+  justify-content: space-around;
+`;
+
+const StyledNavContainerLanding = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  width: 30%;
+  justify-content: flex-end;
 `;
 
 export default function NavBar() {
@@ -51,17 +58,25 @@ export default function NavBar() {
 
   return (
     <StyledNavBar>
-      <StyledHeader onClick={() => push("/dashboard")}>Namaste</StyledHeader>
+      <StyledTitle onClick={() => push("/dashboard")}>Namaste</StyledTitle>
       {loggedIn ? (
         <StyledNavContainer>
           <StyledLink to="/dashboard">Home</StyledLink>
-          <StyledLink to="/testing">Tasks</StyledLink>
+          <StyledLink to="/task">Tasks</StyledLink>
           <StyledLink to="/journal">Journals</StyledLink>
+          <StyledLink to="/contact">Contact</StyledLink>
           <StyledLink to="/" onClick={() => handleSignOut()}>
             Sign Out
           </StyledLink>
         </StyledNavContainer>
-      ) : null}
+      ) : (
+        <StyledNavContainerLanding>
+          <StyledLink to="/contact">Contact</StyledLink>
+          <StyledLink to="/login" onClick={() => handleSignOut()}>
+            Sign In
+          </StyledLink>
+        </StyledNavContainerLanding>
+      )}
     </StyledNavBar>
   );
 }
