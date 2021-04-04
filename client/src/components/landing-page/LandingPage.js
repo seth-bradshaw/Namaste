@@ -32,18 +32,6 @@ const StyledParagraph = styled.p`
   width: 30%;
 `;
 
-const StyledButton = styled(Button)`
-  margin-top: 2%;
-  background-color: #fe6e00;
-  border-color: #fe6e00;
-  border-radius: 25px;
-  &:hover {
-    background-color: #fe6e00;
-    border-color: #fe6e00;
-    border-radius: 25px;
-  }
-`;
-
 const StyledCardsContainer = styled.div`
   display: flex;
   justify-content: space-around;
@@ -79,9 +67,9 @@ const futureReleases = [
       "In release 3 calorie tracking will be available. You will be able to track macros, and  calcuate the amount of  calories needed for your goals ",
   },
   {
-    feature: "Calorie Tracking",
+    feature: "Fitness Tracking",
     description:
-      "Fitness is key to a healthy and happy life. You will be  able to add new workouts and track the duration and  intensity of a workout.",
+      "Fitness tracking will be available in release 4. You will be  able to add new workouts and track the duration and  intensity of a workout.",
   },
 ];
 
@@ -100,9 +88,20 @@ export default function LandingPage() {
             designed a product that when used as intended will lead to a happier
             more fullfilling life one day at a time.
           </StyledParagraph>
-          <StyledButton onClick={() => push("/login")}>
+          <Button
+            onClick={() => push("/login")}
+            style={{
+              backgroundColor: "#0090fe",
+              borderColor: "#0090fe",
+              margin: "auto",
+              borderRadius: "25px",
+              width: "25%",
+              fontFamily: "Poppins",
+              fontWeight: "Bold",
+            }}
+          >
             Get Started
-          </StyledButton>
+          </Button>
         </StyledHeaderContent>
       </StyledHeader>
       <StyledSection>

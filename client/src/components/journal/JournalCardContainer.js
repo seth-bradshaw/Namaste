@@ -59,7 +59,7 @@ export default function JournalCardContainer(props) {
 
   return (
     <StyledPageContainer>
-      <StyledHeader>{activeUser.username}'s Journals</StyledHeader>
+      <StyledHeader>What's on your mind?</StyledHeader>
       <StyledContainer>
         <StyledMenuBar>
           <Form

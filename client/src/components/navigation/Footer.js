@@ -7,16 +7,16 @@ import {
 } from "@tabler/icons";
 
 const StyledFooter = styled.div`
-  height: 250px;
-  background-color: #f8f9fa;
-  border-top: solid 1px #0e1111;
+  height: 200px;
+  width: 100%;
+  background-color: #414a4c;
   display: flex;
   flex-direction: column;
   align-content: center;
 `;
 
 const StyledFooterContent = styled.div`
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,10 +26,10 @@ const StyledFooterContent = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 28px;
+  font-size: 35px;
   font-family: Poppins;
   color: #fe6e00;
-  margin: 0% auto 1% auto;
+  margin: 0% auto 0% auto;
   font-weight: bolder;
 `;
 
@@ -57,13 +57,13 @@ export default function Footer() {
             href="https://www.linkedin.com/in/seth-bradshaw/"
             target="_blank"
           >
-            <IconBrandLinkedin></IconBrandLinkedin>
+            <IconBrandLinkedin style={{ color: "white" }}></IconBrandLinkedin>
           </StyledLink>
           <StyledLink href="https://github.com/seth-bradshaw" target="_blank">
-            <IconBrandGithub></IconBrandGithub>
+            <IconBrandGithub style={{ color: "white" }}></IconBrandGithub>
           </StyledLink>
           <StyledLink href="" target="_blank">
-            <IconBrandFacebook></IconBrandFacebook>
+            <IconBrandFacebook style={{ color: "white" }}></IconBrandFacebook>
           </StyledLink>
         </StyledIconContainer>
       </StyledFooterContent>
